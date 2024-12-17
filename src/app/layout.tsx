@@ -1,6 +1,29 @@
+
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css"; 
+
+// Auto Add CSS
+config.autoAddCss = false;
+
+export const MainLayout = ({ children, isHome }:any) => {
+  return (
+    <div>
+      {/* Home page par header ko hide karenge */}
+      {!isHome && <Header />}
+      
+      <main>{children}</main>
+
+      {/* Footer har page par dikhai dega */}
+      {/* <Footer /> */}
+    </div>
+  );
+};
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,7 +51,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
